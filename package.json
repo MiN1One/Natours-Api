@@ -25,6 +25,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.13",
     "morgan": "^1.10.0",
+    "ndb": "^1.1.5",
     "nodemailer": "^6.4.16",
     "nodemon": "^2.0.6",
     "prettier": "^2.1.2",

@@ -1,6 +1,7 @@
 const mogoose = require('mongoose');
 const slugify = require('slugify');
 // const validatorjs = require('validator');
+const User = require('./userModel');
 
 const tourSchema = new mogoose.Schema(
   {
@@ -76,7 +77,31 @@ const tourSchema = new mogoose.Schema(
     secretTour: {
       type: Boolean,
       default: false
-    }
+    },
+    startLocation: {
+      type: {
+        type: String,
+        default: 'Point',
+        enum: ['Point']
+      },
+      coordinates: [Number],
+      address: String,
+      description: String,
+    },
+    locations: [
+      {
+        type: {
+          type: String,
+          default: 'Point',
+          enum: ['Point']
+        },
+        coordinates: [Number],
+        address: String,
+        description: String,
+        day: Number
+      }
+    ],
+    guides: Array
   }, {
       toJSON: { virtuals: true },
       toObject: { virtuals: true }
@@ -93,6 +118,11 @@ tourSchema.virtual('durationWeeks').get(function() {
 // DOCUMENT MIDDLEWARE: runs before .save() and .create(), not insertComs
 tourSchema.pre('save', function(next) {
   this.slug = slugify(this.name, { lower: true });
+  next();
+});
+
+tourSchema.pre('save', function(next) {
+  // const guides = this.guides.map(el => 
   next();
 });
 
