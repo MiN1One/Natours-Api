@@ -2,3 +2,4 @@ node_modules
 .prettierrc
 config.env
 .eslintrc.json
+dev-data
